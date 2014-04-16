@@ -1,0 +1,89 @@
+#!/bin/bash
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+JELASTICBASIC_BIN_DIR=${OPENSHIFT_JELASTICBASIC_DIR}/versions/1.0/jelasticbasic/bin
+
+
+function is_running() {
+    pgrep jelasticbasic  > /dev/null 2>&1;
+    return $?
+}
+
+function status() {
+    if [ is_running ]; then
+        client_result "Jelasticbasic is running"
+    else
+        client_result "Jelasticbasic is not running"
+    fi
+}
+
+function start() {
+    if (is_running); then
+        exit 0
+    fi
+
+    echo "This is basic jelastic cartridge" > /tmp/index.html
+    ${JELASTICBASIC_BIN_DIR}/jelasticbasic -p ${OPENSHIFT_JELASTICBASIC_APP_PORT} -r /tmp/ &
+
+    ret=$?
+    if [ $ret -ne 0 ]; then
+        echo "Jelasticbasic failed to start - $ret" 1>&2
+        exit $ret
+    fi
+}
+
+function stop() {
+    if (is_running); then
+        killall -9 jelasticbasic
+    fi
+}
+
+function restart() {
+    if (stop); then
+        start
+    else
+        start
+    fi
+}
+
+function build() {
+    echo
+}
+
+function post-deploy() {
+    echo
+}
+
+function pre-build() {
+    echo
+}
+
+function tidy() {
+    echo
+}
+
+#
+#  main():
+#
+
+# Ensure arguments.
+if ! [ $# -eq 1 ]; then
+    echo "Usage: $0 [start|restart|graceful|graceful-stop|stop|status]"
+    exit 1
+fi
+
+# Source utility functions.
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+# Handle commands.
+case "$1" in
+    start)               start       ;;
+    restart|graceful)    restart     ;;
+    graceful-stop|stop)  stop        ;;
+    status)              status      ;;
+    build)               build       ;;
+    pre-build)           pre-build   ;;
+    post-deploy)         post-deploy ;;
+    tidy)                tidy        ;;
+    *) exit 0;
+esac
