@@ -11,7 +11,7 @@ Cartridge-Vendor: jelasticbasic
 Categories:
   - service
   - embedded
-Source-Url: https://github.com/ihorman/openshift-jelastic-basic-cartridge.git
+Source-Url: https://github.com/jelastic-public-cartridges/openshift-jelastic-basic-cartridge.git
 Website: http://jelastic.com/
 Help-Topics:
   "Developer Center": https://jelastic.com
