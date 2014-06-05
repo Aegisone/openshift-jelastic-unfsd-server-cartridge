@@ -2,10 +2,10 @@ Name: junfsdserver
 Cartridge-Short-Name: JUNFSDSERVER
 Display-Name: JELASTICUNFSD
 Description: "Jelastic basic webserver cartrodge"
-Version: '1.1'
+Version: '1.1.1'
 License: GPL
 Vendor: skilltex
-Cartridge-Version: 1.1
+Cartridge-Version: 1.1.1
 Cartridge-Vendor: skilltex
 Categories:
   - service
