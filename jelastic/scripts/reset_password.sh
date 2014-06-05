@@ -10,7 +10,8 @@ SED=$(which sed);
 #$J_OPENSHIFT_APP_ADM_PASSWORD    ;   Use this varible for your password
 
 function _setPassword() {
-	return 0;
+	echo -e "$J_OPENSHIFT_APP_ADM_PASSWORD\n$J_OPENSHIFT_APP_ADM_PASSWORD" | passwd
+	return $?;
 }
 
 
