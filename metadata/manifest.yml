@@ -3,14 +3,13 @@ Cartridge-Short-Name: JUNFSDSERVER
 Display-Name: JELASTICUNFSD
 Description: "Jelastic basic webserver cartrodge"
 Version: '1.0'
-License: No Licence
-License-Url: 
-Vendor: SKILLTEX, LLP
+License: GPL
+Vendor: skilltex
 Cartridge-Version: 1.0
 Cartridge-Vendor: skilltex
 Categories:
   - service
-  - embedded
+  - web_framework
 Source-Url: https://github.com/Aegisone/openshift-jelastic-unfsd-server-cartridge.git
 Website: http://dnr.kz/
 Help-Topics:
@@ -25,20 +24,21 @@ Cart-Data:
   - Key: OPENSHIFT_DATA_DIR
     Type: environment
     Description: "Directory to store application data files. Preserved across git-pushes. Not shared across gears."
-  - Key: OPENSHIFT_APP_UUID
-    Type: environment
-    Description: "Unique ID which identified the application. Does not change between gears."
-  - Key: OPENSHIFT_GEAR_UUID
-    Type: environment
-    Description: "Unique ID which identified the gear. This value changes between gears."
 Provides:
   - nfs
 Scaling:
   Min: 1
   Max: 1
 Endpoints:
-  - Private-IP-Name:   APP_HOST
-    Private-Port-Name: APP_PORT
-    Private-Port:      8080
-    Public-Port-Name:  APP_PROXY_PORT
+  - Private-IP-Name:   HOST
+    Private-Port-Name: PORT
+    Private-Port:      80
+    Public-Port-Name:  PORT
+Subscribes:
+  reset-password-info:
+    Type: "FILESYSTEM:reset-password"
+    Required: false
+Publishes:
+  publish-db-connection-info:
+    Type: "ENV:NET_TCP:nfs:connection-info"
 
