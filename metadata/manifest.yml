@@ -1,20 +1,20 @@
-Name: jelasticbasic
-Cartridge-Short-Name: JELASTICBASIC
-Display-Name: JELASTICBASIC
+Name: junfsdserver
+Cartridge-Short-Name: JUNFSDSERVER
+Display-Name: JELASTICUNFSD
 Description: "Jelastic basic webserver cartrodge"
 Version: '1.0'
 License: No Licence
 License-Url: 
-Vendor: Jelastic
+Vendor: SKILLTEX, LLP
 Cartridge-Version: 1.0
-Cartridge-Vendor: jelasticbasic
+Cartridge-Vendor: skilltex
 Categories:
   - service
   - embedded
-Source-Url: https://github.com/jelastic-public-cartridges/openshift-jelastic-basic-cartridge.git
-Website: http://jelastic.com/
+Source-Url: https://github.com/Aegisone/openshift-jelastic-unfsd-server-cartridge.git
+Website: http://dnr.kz/
 Help-Topics:
-  "Developer Center": https://jelastic.com
+  "Developer Center": https://support.dnr.kz
 Cart-Data:
   - Key: OPENSHIFT_APP_DNS
     Type: environment
@@ -32,7 +32,7 @@ Cart-Data:
     Type: environment
     Description: "Unique ID which identified the gear. This value changes between gears."
 Provides:
-  - jelasticbasic
+  - nfs
 Scaling:
   Min: 1
   Max: 1
