@@ -5,15 +5,15 @@ JELASTICBASIC_BIN_DIR=${OPENSHIFT_JELASTICBASIC_DIR}/versions/1.0/jelasticbasic/
 
 
 function is_running() {
-    pgrep jelasticbasic  > /dev/null 2>&1;
+    (service unfsd status && service rpcbind status && service nginx status) > /dev/null 2>&1 ;
     return $?
 }
 
 function status() {
     if [ is_running ]; then
-        client_result "Jelasticbasic is running"
+        client_result "NFS Server Bundle is running"
     else
-        client_result "Jelasticbasic is not running"
+        client_result "NFS Server Bundle is not running"
     fi
 }
 
@@ -22,20 +22,15 @@ function start() {
         exit 0
     fi
 
-    echo "This is basic jelastic cartridge" > /tmp/index.html
-    ${JELASTICBASIC_BIN_DIR}/jelasticbasic -p ${OPENSHIFT_JELASTICBASIC_APP_PORT} -r /tmp/ &
-
-    ret=$?
-    if [ $ret -ne 0 ]; then
-        echo "Jelasticbasic failed to start - $ret" 1>&2
-        exit $ret
-    fi
+    service nginx start
+    service unfsd start
+    service rpcbind start
 }
 
 function stop() {
-    if (is_running); then
-        killall -9 jelasticbasic
-    fi
+    service nginx stop
+    service unfsd stop
+    service rpcbind stop
 }
 
 function restart() {
