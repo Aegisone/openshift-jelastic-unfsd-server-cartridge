@@ -1,0 +1,14 @@
+---
+locked_files:
+- bin/
+- bin/*
+- etc/
+- etc/conf/
+- etc/conf/*
+- etc/conf.d/
+- hooks/
+- hooks/*
+- metadata/
+- metadata/*
+- conf/
+- env/
