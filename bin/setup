@@ -17,7 +17,8 @@ chkconfig rpcbind on
 service rpcbind start
 service unfsd start
 
-cat << EOF > etc/exports
+rm -rf /etc/exports
+cat << EOF > `pwd`/etc/exports
 # Place your shares here
 # Format:
 # /path/to/share	1.2.3.4(rw,no_root_squash)
@@ -34,12 +35,11 @@ EOF
 
 yum -y install nginx
 
-mkdir -p /var/www/webroot
 
 rm -rf /etc/nginx/conf.d
 ln -s `pwd`/etc/conf.d /etc/nginx/conf.d
 
-cat << EOF > etc/conf.d/default.conf
+cat << EOF > `pwd`/etc/conf.d/default.conf
 server {
     listen       80;
     server_name  localhost;
@@ -51,10 +51,6 @@ server {
         index  index.html index.htm;
     }
 
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   /usr/share/nginx/html;
-    }
 
     location ~ /\.ht {
         deny  all;
